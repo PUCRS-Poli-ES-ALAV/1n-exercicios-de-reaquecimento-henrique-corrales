@@ -1,22 +1,20 @@
 public class Exercicio7 {
-    public static int[] arr (int[] nums, int index, int sum, int prod) {
-        if (index < nums.length) {
-            if (index == 0) prod = 1;
-            sum += nums[index];
-            prod *= nums[index];
-            index++;
-            return arr(nums, index, sum, prod);
+    public static int[] calcularSomaEProduto(int[] nums, int index) {
+        if (index == nums.length) {
+            return new int[]{0, 1};
         }
-        int[] ans = new int[2];
-        ans[0] = sum;
-        ans[1] = prod;
-        return ans;
+
+        int[] resultado = calcularSomaEProduto(nums, index + 1);
+        resultado[0] += nums[index];
+        resultado[1] *= nums[index];
+
+        return resultado;
     }
 
     public static void main(String[] args) {
-       int[] nums = {1,2,3,4,5};
-       int[] ans = arr(nums, 0, 0, 0);
-       System.out.println(ans[0]);
-       System.err.println(ans[1]);
-}
+        int[] nums = {1, 2, 3, 4, 5};
+        int[] resultado = calcularSomaEProduto(nums, 0);
+        System.out.println("Soma: " + resultado[0]);
+        System.out.println("Produto: " + resultado[1]);
+    }
 }
